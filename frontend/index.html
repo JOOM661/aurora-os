@@ -1,1 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURORA-X BOOT SEQUENCE</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            overflow: hidden;
+            font-family: 'Courier New', monospace;
+        }
+        
+        #boot-screen {
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+            color: #0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .boot-logo {
+            font-size: 4rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+            letter-spacing: 5px;
+        }
+        
+        .boot-text {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+            opacity: 0;
+            animation: typewriter 1s forwards;
+        }
+        
+        .boot-text:nth-child(2) { animation-delay: 1s; }
+        .boot-text:nth-child(3) { animation-delay: 2.5s; }
+        .boot-text:nth-child(4) { animation-delay: 4s; }
+        
+        @keyframes typewriter {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .progress-container {
+            width: 50%;
+            height: 4px;
+            background: #333;
+            margin-top: 2rem;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: #0f0;
+            animation: progress 5s linear forwards;
+        }
+        
+        @keyframes progress {
+            to { width: 100%; }
+        }
+        
+        .status-line {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #0f0;
+            opacity: 0;
+            animation: fadeIn 0.5s 5.5s forwards;
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div id="boot-screen">
+        <div class="boot-logo">AURORA-X</div>
+        <div class="boot-text">Initializing AURORA-X Kernel v3.9...</div>
+        <div class="boot-text">Loading Defense Modules...</div>
+        <div class="boot-text">Establishing Secure Channel...</div>
+        <div class="boot-text">Verifying System Integrity...</div>
+        
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+        
+        <div class="status-line" id="status">BOOT COMPLETE - Redirecting to login...</div>
+    </div>
 
+    <script>
+        setTimeout(() => {
+            window.location.href = '/login';
+        }, 6000);
+    </script>
+</body>
+</html>
