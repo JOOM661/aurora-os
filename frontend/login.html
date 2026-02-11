@@ -1,1 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AURORA-X SECURE LOGIN</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #000;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 100, 255, 0.1) 0%, transparent 50%);
+            font-family: 'Courier New', monospace;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .login-container {
+            background: rgba(0, 20, 40, 0.9);
+            border: 1px solid #0ff;
+            border-radius: 10px;
+            padding: 3rem;
+            width: 400px;
+            box-shadow: 
+                0 0 30px rgba(0, 255, 255, 0.3),
+                inset 0 0 20px rgba(0, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(0, 255, 255, 0.1) 50%,
+                transparent 70%
+            );
+            animation: shine 4s linear infinite;
+        }
+        
+        @keyframes shine {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-title {
+            color: #0ff;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            letter-spacing: 2px;
+        }
+        
+        .login-subtitle {
+            color: #0f0;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            opacity: 0.8;
+        }
+        
+        .login-form {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            color: #0ff;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            background: rgba(0, 30, 60, 0.8);
+            border: 1px solid #0ff;
+            border-radius: 5px;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        .form-input:focus {
+            border-color: #0f0;
+            box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+        }
+        
+        .form-input::placeholder {
+            color: rgba(0, 255, 255, 0.5);
+        }
+        
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, #0066ff, #00ccff);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+        
+        .login-button:hover {
+            background: linear-gradient(45deg, #00ccff, #0066ff);
+            box-shadow: 0 0 20px rgba(0, 204, 255, 0.7);
+            transform: translateY(-2px);
+        }
+        
+        .login-button:active {
+            transform: translateY(0);
+        }
+        
+        .login-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: #0ff;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .error-message {
+            color: #ff0066;
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        .security-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            color: #0ff;
+            font-size: 0.8rem;
+        }
+        
+        .indicator-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .indicator-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #0f0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1 class="login-title">AURORA-X</h1>
+            <div class="login-subtitle">MILITARY GRADE OPERATING SYSTEM</div>
+        </div>
+        
+        <div class="security-indicator">
+            <div class="indicator-item">
+                <div class="indicator-dot"></div>
+                <span>ENCRYPTION: ACTIVE</span>
+            </div>
+            <div class="indicator-item">
+                <div class="indicator-dot"></div>
+                <span>SECURE CHANNEL</span>
+            </div>
+        </div>
+        
+        <form class="login-form" id="loginForm">
+            <div class="form-group">
+                <label class="form-label">CALLSIGN / USERNAME</label>
+                <input type="text" class="form-input" id="username" placeholder="Enter callsign" required>
+            </div>
+            
+            <div class="form-group">
+                <label class="form-label">ACCESS CODE</label>
+                <input type="password" class="form-input" id="password" placeholder="Enter access code" required>
+            </div>
+            
+            <div class="error-message" id="errorMessage">
+                ACCESS DENIED: Invalid credentials
+            </div>
+            
+            <button type="submit" class="login-button">
+                <span id="buttonText">INITIATE ACCESS</span>
+                <span id="loadingText" style="display: none;">AUTHENTICATING...</span>
+            </button>
+        </form>
+        
+        <div class="login-footer">
+            SYSTEM v3.9.0 | CLASSIFIED ACCESS ONLY
+        </div>
+    </div>
 
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const buttonText = document.getElementById('buttonText');
+            const loadingText = document.getElementById('loadingText');
+            const errorMessage = document.getElementById('errorMessage');
+            
+            // Show loading state
+            buttonText.style.display = 'none';
+            loadingText.style.display = 'inline';
+            errorMessage.style.display = 'none';
+            
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Store token
+                    localStorage.setItem('token', data.access_token);
+                    localStorage.setItem('user', JSON.stringify({
+                        username: data.username,
+                        role: data.role
+                    }));
+                    
+                    // Redirect to desktop
+                    window.location.href = '/desktop';
+                } else {
+                    throw new Error('Authentication failed');
+                }
+            } catch (error) {
+                buttonText.style.display = 'inline';
+                loadingText.style.display = 'none';
+                errorMessage.style.display = 'block';
+                
+                // Add shake animation
+                document.getElementById('loginForm').style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    document.getElementById('loginForm').style.animation = '';
+                }, 500);
+            }
+        });
+        
+        // Add shake animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Auto-focus username field
+        document.getElementById('username').focus();
+    </script>
+</body>
+</html>
